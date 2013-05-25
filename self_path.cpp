@@ -53,7 +53,10 @@ ssize_t self_path_c(char ** const buf)
 			perror("error: readlink");
 			break;
 		}
-		size *= 2;
+		if (result >= (size - 1)) {
+			size *= 2;
+			result = -1; // continue loop
+		}
 	} while (result == -1);
 	if (result >= 0) {
 		// readlink doesn't terminate string
