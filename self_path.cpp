@@ -54,12 +54,14 @@ ssize_t self_path_c(char ** const buf)
 			break;
 		}
 		if (result >= (size - 1)) {
+			// In this condition, buf may have truncated path
+			// because readlink truncates long path without error
 			size *= 2;
 			result = -1; // continue loop
 		}
 	} while (result == -1);
 	if (result >= 0) {
-		// readlink doesn't terminate string
+		// readlink doesn't null-terminate string
 		(*buf)[result] = '\0';
 	}
 	return result;
