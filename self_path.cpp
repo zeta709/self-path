@@ -57,7 +57,7 @@ ssize_t self_path_c(char ** const buf)
 	} while (result == -1);
 	if (result >= 0) {
 		// readlink doesn't terminate string
-		buf[result] = '\0';
+		(*buf)[result] = '\0';
 	}
 	return result;
 //#elif defined(_WIN32) // Windows 32-bit and 64-bit
